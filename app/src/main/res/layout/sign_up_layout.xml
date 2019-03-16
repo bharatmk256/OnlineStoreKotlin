@@ -77,5 +77,18 @@
         android:inputType="textPassword"
         android:drawableRight="@drawable/confirm"/>
 
+    <Button
+        android:id="@+id/sign_up_layout_btnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Sign Up"/>
+
+    <Button
+        android:id="@+id/sign_up_layout_btnSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Login"/>
 
 </LinearLayout>
