@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         activity_main_btnLogin.setOnClickListener {
 
-            val logitnURL = "http://192.168.0.104/OnlineStoreApp/login_app_user.php?email=" +
+            val loginURL = "http://192.168.0.104/OnlineStoreApp/login_app_user.php?email=" +
                     activity_main_edtEmail.text.toString() + "&pass=" +
                     activity_main_edtPassword.text.toString()
 
@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
             val stringRequest = StringRequest(Request.Method.GET, loginURL, Response.Listener { response ->
 
                 if (response.equals("The user does exist")) {
+                    Person.email = activity_main_edtEmail.text.toString()
                     Toast.makeText(this@MainActivity, "You are logged in", Toast.LENGTH_SHORT).show()
+                    val homeIntent = Intent(this@MainActivity, HomeScreen::class.java)
+                    startActivity(homeIntent)
                 } else {
                     val dialogBuilder = AlertDialog.Builder(this)
                     dialogBuilder.setTitle("Alert")

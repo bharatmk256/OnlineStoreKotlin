@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -17,8 +18,7 @@ class SignUpLayout : AppCompatActivity() {
         setContentView(R.layout.sign_up_layout)
 
         sign_up_layout_btnSignIn.setOnClickListener {
-            var signInIntent = Intent(this@SignUpLayout, MainActivity::class.java)
-            startActivity(signInIntent)
+            finish()
         }
 
         sign_up_layout_btnSignUp.setOnClickListener {
@@ -34,16 +34,23 @@ class SignUpLayout : AppCompatActivity() {
                             sign_up_layout_edtPassword.text.toString()
                 val requestQ = Volley.newRequestQueue(this@SignUpLayout)
                 val stringRequest = StringRequest(Request.Method.GET, signUpURL, Response.Listener { response ->
-                    if (response.equals("A user with this Email Address already exist")){
+                    if (response.equals("A user with this Email Address already exist")) {
                         val dialogBuilder = AlertDialog.Builder(this)
                         dialogBuilder.setTitle("Alert")
                         dialogBuilder.setMessage(response)
                         dialogBuilder.show()
-                    }else{
-                        val dialogBuilder = AlertDialog.Builder(this)
-                        dialogBuilder.setTitle("Alert")
-                        dialogBuilder.setMessage(response)
-                        dialogBuilder.show()
+                    } else {
+//                        val dialogBuilder = AlertDialog.Builder(this)
+//                        dialogBuilder.setTitle("Alert")
+//                        dialogBuilder.setMessage(response)
+//                        dialogBuilder.show()
+
+                        Person.email = sign_up_layout_edtEmail.text.toString()
+
+                        Toast.makeText(this@SignUpLayout, response, Toast.LENGTH_SHORT).show()
+
+                        val homeIntent = Intent(this@SignUpLayout, HomeScreen::class.java)
+                        startActivity(homeIntent)
                     }
 
                 }, Response.ErrorListener { error ->
