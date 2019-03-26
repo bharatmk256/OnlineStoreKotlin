@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -25,7 +26,7 @@ class AmountFragment : android.app.DialogFragment() {
         var fragmentView = inflater.inflate(R.layout.fragment_amount, container, false)
 
         var edtEnterAmount = fragmentView.findViewById<EditText>(R.id.edtEnterAmount)
-        var btnAddToCart = fragmentView.findViewById<Button>(R.id.btnAddToCart)
+        var btnAddToCart = fragmentView.findViewById<ImageButton>(R.id.btnAddToCart)
 
         btnAddToCart.setOnClickListener {
 
@@ -36,6 +37,7 @@ class AmountFragment : android.app.DialogFragment() {
 
                     response ->
                 var intent = Intent(activity,CartProductsActivity::class.java)
+                startActivity(intent)
 
             }, Response.ErrorListener { error ->
 
@@ -45,6 +47,7 @@ class AmountFragment : android.app.DialogFragment() {
                 dialogBuilder.create().show()
 
             })
+            requestQ.add(stringRequest)
         }
         return fragmentView
     }
